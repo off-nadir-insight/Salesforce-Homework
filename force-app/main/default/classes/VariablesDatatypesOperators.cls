@@ -50,4 +50,7 @@ public with sharing class VariablesDatatypesOperators {
      * @param a Integer multiplicand 
      * @param b Integer multiplier
      */
+    public static Integer multiplication(Integer a, Integer b) {
+        return a * b;
+    }
 }

@@ -38,6 +38,14 @@ public class VariablesDatatypesOperatorsTest {
 
     @IsTest
     static void testMultiplication() {
-        
+        Integer result;
+        result = VariablesDatatypesOperators.multiplication(10, 0);
+        Assert.areEqual(0, result, 'Incorrect zero multiplication result');
+        result = VariablesDatatypesOperators.multiplication(2, 3);
+        Assert.areEqual(6, result, 'Incorrect multiplication result');
+        result = VariablesDatatypesOperators.multiplication(2, -4);
+        Assert.areEqual(-8, result, 'Incorrect negative multiplication result');
+        result = VariablesDatatypesOperators.multiplication(-7, -4);
+        Assert.areEqual(28, result, 'Incorrect negative multiplication result');
     }
 }

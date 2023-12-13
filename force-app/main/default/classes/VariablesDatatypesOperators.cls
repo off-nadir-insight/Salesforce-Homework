@@ -11,9 +11,6 @@
  */
 
 public with sharing class VariablesDatatypesOperators {
-    public VariablesDatatypesOperators() {
-
-    }
 
     /**
      * Perform addition of two integer values
@@ -31,4 +28,26 @@ public with sharing class VariablesDatatypesOperators {
             return a + b;
         }
     }
+
+    /**
+     * Performs subtraction of two integer values
+     * Should either value be null, return null
+     * Ex. subtraction(5, 2) should return 3
+     * @param a minuend integer
+     * @param b subtrahend integer
+     */
+    public static Integer subtraction(Integer a, Integer b) {
+        if (a == null || b == null) {
+            return null;
+        } else {
+            return a - b;
+        }
+    }
+
+    /**
+     * Performs multiplication of two Integer values
+     * Ex. multiplication(4, 5) should return 20
+     * @param a Integer multiplicand 
+     * @param b Integer multiplier
+     */
 }

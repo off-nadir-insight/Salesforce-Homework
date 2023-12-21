@@ -70,4 +70,17 @@ public with sharing class VariablesDatatypesOperators {
             return a / b;
         }
     }
+
+    /**
+     * Evaluates if the input Integer is even
+     * Ex. isEven(6) should return true
+     * @param num Integer value to evaluate if even
+     */
+    public static Boolean isEven(Integer num) {
+        if (num == null) {
+            return null;
+        } else {
+            return Math.mod(num, 2) == 0;
+        }
+    }
 }

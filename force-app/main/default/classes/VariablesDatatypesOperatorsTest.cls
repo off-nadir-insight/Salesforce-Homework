@@ -63,4 +63,19 @@ public class VariablesDatatypesOperatorsTest {
         result = VariablesDatatypesOperators.integerDivision(12, -3);
         Assert.areEqual(-4, result, 'Division with negative integers returned incorrect value');
     }
+
+    @IsTest 
+    static void testIsEven() {
+        Boolean result;
+        result = VariablesDatatypesOperators.isEven(null);
+        Assert.isNull(result, 'Incorrect boolean evaluation, expected null return');
+        result = VariablesDatatypesOperators.isEven(8);
+        Assert.isTrue(result, 'Incorrect boolean evaluation, expected even input to be true.');
+        result = VariablesDatatypesOperators.isEven(3);
+        Assert.isFalse(result, 'Incorrect boolean evaluation, expected negative input to be false.');
+        result = VariablesDatatypesOperators.isEven(0);
+        Assert.isTrue(result, 'Incorrect boolean evaluation, expected zero to be even.');
+        result = VariablesDatatypesOperators.isEven(-2);
+        Assert.isTrue(result, 'Incorrect boolean evaluation, expected negative even input to be evaluate.');
+    }
 }

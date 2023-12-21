@@ -48,4 +48,19 @@ public class VariablesDatatypesOperatorsTest {
         result = VariablesDatatypesOperators.multiplication(-7, -4);
         Assert.areEqual(28, result, 'Incorrect negative multiplication result');
     }
+
+    @IsTest
+    static void testIntegerDivision() {
+        Integer result;
+        result = VariablesDatatypesOperators.integerDivision(10, null);
+        Assert.isNull(result, 'Should return null if either input is null');
+        result = VariablesDatatypesOperators.integerDivision(10, 0);
+        Assert.isNull(result, 'Should return null if divisor is 0');
+        result = VariablesDatatypesOperators.integerDivision(10, 2);
+        Assert.areEqual(5, result, 'Division on two whole integers with no remainder returned incorrect value');
+        result = VariablesDatatypesOperators.integerDivision(10, 3);
+        Assert.areEqual(3, result, 'Division on two whole integers with a remainder returned incorrect value');
+        result = VariablesDatatypesOperators.integerDivision(12, -3);
+        Assert.areEqual(-4, result, 'Division with negative integers returned incorrect value');
+    }
 }

@@ -53,4 +53,21 @@ public with sharing class VariablesDatatypesOperators {
     public static Integer multiplication(Integer a, Integer b) {
         return a * b;
     }
+
+    /**
+     * Performs division of two Integer values, acknowleging the Apex handling of 
+     * Integer division
+     * Ex. division(10, 2) should return 5
+     * @param a Decimal dividend
+     * @param b Decimal divisor
+     */
+    public static Integer integerDivision(Integer a, integer b) {
+        if (a == null || b == null) {
+            return null;
+        } else if (b == 0) {
+            return null;
+        } else {
+            return a / b;
+        }
+    }
 }

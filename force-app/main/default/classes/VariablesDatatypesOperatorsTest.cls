@@ -129,5 +129,18 @@ public class VariablesDatatypesOperatorsTest {
         Assert.isFalse(result, 'Tomorrow isn\'t in the past');
     }
 
-
+    @IsTest
+    static void isDateTodayOrInFuture_test() {
+        Boolean result;
+        result = VariablesDatatypesOperators.isDateTodayOrInFuture(null);
+        Assert.isNotNull(result, 'Null input expects null return');
+        result = VariablesDatatypesOperators.isDateTodayOrInFuture(Date.today() - 1);
+        Assert.isFalse(result, 'Past date expected false return');
+        result = VariablesDatatypesOperators.isDateTodayOrInFuture(Date.today());
+        Assert.isTrue(result, 'Today expected true return');
+        result = VariablesDatatypesOperators.isDateTodayOrInFuture(Date.today() + 1);
+        Assert.isTrue(result, 'Future date expected true return');
+        result = VariablesDatatypesOperators.isDateTodayOrInFuture(Date.newInstance(2100, 1, 1));
+        Assert.isTrue(result, 'Date far in future expected true return');
+    }
 }

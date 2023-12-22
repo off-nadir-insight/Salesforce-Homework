@@ -140,4 +140,15 @@ public with sharing class VariablesDatatypesOperators {
         }
         return (dateToCheck < Date.today());
     }
+
+    /**
+     * Check if date is today or in the future
+     * Ex isDateTodayOrInFuture(Date.newInstance(2100, 1, 1)) should return true
+     * as of 2023
+     * @param dateToCheck Date to test if takes place today or in future
+     * @return Boolean 
+     */
+    public static Boolean isDateTodayOrInFuture(Date dateToCheck) {
+        return dateToCheck >= Date.today();
+    }
 }

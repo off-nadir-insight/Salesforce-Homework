@@ -21,7 +21,7 @@ public with sharing class VariablesDatatypesOperators {
      * @param b second integer
      * @return sum of the two integers
      */
-    public static Integer addition(Integer a, Integer b) {
+    public static Integer addsTwoIntegers(Integer a, Integer b) {
         if (a == null || b == null) {
             return null;
         } else {
@@ -35,8 +35,9 @@ public with sharing class VariablesDatatypesOperators {
      * Ex. subtraction(5, 2) should return 3
      * @param a minuend integer
      * @param b subtrahend integer
+     * @return difference of two integers
      */
-    public static Integer subtraction(Integer a, Integer b) {
+    public static Integer subtractsTwoIntegers(Integer a, Integer b) {
         if (a == null || b == null) {
             return null;
         } else {
@@ -49,8 +50,9 @@ public with sharing class VariablesDatatypesOperators {
      * Ex. multiplication(4, 5) should return 20
      * @param a Integer multiplicand 
      * @param b Integer multiplier
+     * @return Integer product of two values
      */
-    public static Integer multiplication(Integer a, Integer b) {
+    public static Integer multiplysTwoIntegers(Integer a, Integer b) {
         return a * b;
     }
 
@@ -60,8 +62,9 @@ public with sharing class VariablesDatatypesOperators {
      * Ex. division(10, 2) should return 5
      * @param a Decimal dividend
      * @param b Decimal divisor
+     * @return Integer quotient of two input integers
      */
-    public static Integer integerDivision(Integer a, integer b) {
+    public static Integer dividesTwoIntegers(Integer a, integer b) {
         if (a == null || b == null) {
             return null;
         } else if (b == 0) {
@@ -75,6 +78,7 @@ public with sharing class VariablesDatatypesOperators {
      * Evaluates if the input Integer is even
      * Ex. isEven(6) should return true
      * @param num Integer value to evaluate if even
+     * @return Boolean evaluation
      */
     public static Boolean isEven(Integer num) {
         if (num == null) {
@@ -82,5 +86,37 @@ public with sharing class VariablesDatatypesOperators {
         } else {
             return Math.mod(num, 2) == 0;
         }
+    }
+
+    /**
+     * Returns boolean evaluating whether or not an Integer value is positive
+     * Ex. isPositive(3) should return true
+     * @param num Integer value to check if positive
+     * @return Boolean evaluation
+     */
+    public static Boolean isPositive(Integer num) {
+        return num > 0;
+    }
+
+    /**
+     * Returns the concatenated version of two input strings
+     * Ex. concatenateStrings('Hello,','World!') should return 'Hello,World!'
+     * @param a String value
+     * @param b String value to append to parameter 'a'
+     * @return String of combined inputs
+     */
+    public static String concatenatesStrings(String a, String b) {
+        return a + b;
+    }
+
+    /**
+     * Return string 'formatted' as a hashtag from a list of strings
+     * Ex. hashtagGenerator(List<String>{'hello', 'world'}) returns
+     * '#helloworld'
+     * @param inputList List<String> for formatting
+     * @return String suitable for hashtag usage
+     */
+    public static String generatesHashtag(List<String> inputList) {
+        return null;
     }
 }

@@ -127,4 +127,16 @@ public with sharing class VariablesDatatypesOperators {
         }
         return PREFIX + hashtagPhrase + SUFFIX;
     }
+
+    /**
+     * Check if inpute date is in the past
+     * @param dateToCheck Date to test if in the past
+     * @return Boolean for past-ness of date
+     */
+    public static Boolean isPastDate(Date dateToCheck) {
+        if (dateToCheck == null) {
+            return null;
+        }
+        return (dateToCheck < Date.today());
+    }
 }

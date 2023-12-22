@@ -113,4 +113,21 @@ public class VariablesDatatypesOperatorsTest {
         result = VariablesDatatypesOperators.generatesHashtag(new List<String>{'dev ', '  ', '  stuff'});
         Assert.areEqual('#DevStuff!', result, 'Unexpected handling of blank inputs');
     }
+
+    @IsTest 
+    static void isPastDate_test() {
+        Boolean result;
+        result = VariablesDatatypesOperators.isPastDate(null);
+        Assert.isNull(result, 'Null input handled unexpectedly');
+        result = VariablesDatatypesOperators.isPastDate(Date.today() - 1);
+        Assert.isNotNull(result, 'Output shouldn\'t be null');
+        result = VariablesDatatypesOperators.isPastDate(Date.today() - 1);
+        Assert.isTrue(result, 'Yesterday should be in the past');
+        result = VariablesDatatypesOperators.isPastDate(Date.today());
+        Assert.isFalse(result, 'Today isn\'t in the past');
+        result = VariablesDatatypesOperators.isPastDate(Date.today() + 1);
+        Assert.isFalse(result, 'Tomorrow isn\'t in the past');
+    }
+
+
 }

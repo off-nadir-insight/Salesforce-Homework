@@ -151,4 +151,15 @@ public with sharing class VariablesDatatypesOperators {
     public static Boolean isDateTodayOrInFuture(Date dateToCheck) {
         return dateToCheck >= Date.today();
     }
+
+    /**
+     * Convert a number of minutes into milliseconds
+     * Ex. convertsMinutesToMilliseconds(3) should return 180000
+     * @param minutes Integer value to convert
+     * @return number of equivalent milliseconds as an integer
+     */
+    public static Integer convertsMinutesToMilliseconds(Integer minutes) {
+        final Integer MS_PER_MIN = 60000;
+        return minutes * MS_PER_MIN;
+    }
 }

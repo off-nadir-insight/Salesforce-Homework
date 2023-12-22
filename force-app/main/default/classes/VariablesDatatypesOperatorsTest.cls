@@ -143,4 +143,16 @@ public class VariablesDatatypesOperatorsTest {
         result = VariablesDatatypesOperators.isDateTodayOrInFuture(Date.newInstance(2100, 1, 1));
         Assert.isTrue(result, 'Date far in future expected true return');
     }
+
+    @IsTest
+    static void convertsMinutesToMilliseconds_test() {
+        Integer result;
+        result = VariablesDatatypesOperators.convertsMinutesToMilliseconds(1);
+        Assert.isNotNull(result, 'Expected a non-Null return');
+        result = VariablesDatatypesOperators.convertsMinutesToMilliseconds(1);
+        Assert.areEqual(60000, result, 'Unexpected return from positive integer input');
+        result = VariablesDatatypesOperators.convertsMinutesToMilliseconds(60);
+        Assert.areEqual(3600000, result, 'Unexpected return from large input');
+
+    }
 }

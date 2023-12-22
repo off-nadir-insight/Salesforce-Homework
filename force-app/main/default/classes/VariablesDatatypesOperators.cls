@@ -130,6 +130,7 @@ public with sharing class VariablesDatatypesOperators {
 
     /**
      * Check if inpute date is in the past
+     * Ex. isPastDate(Date.newInstance(2019, 1, 1)) should return true from 2023
      * @param dateToCheck Date to test if in the past
      * @return Boolean for past-ness of date
      */

@@ -116,7 +116,15 @@ public with sharing class VariablesDatatypesOperators {
      * @param inputList List<String> for formatting
      * @return String suitable for hashtag usage
      */
-    public static String generatesHashtag(List<String> inputList) {
-        return null;
+    public static String generatesHashtag(List<String> words) {
+        final String PREFIX = '#';
+        final String SUFFIX = '!';
+        String hashtagPhrase = '';
+        for (String word : words) {
+            word = word.deleteWhitespace();
+            word = word.capitalize();
+            hashtagPhrase += word;
+        }
+        return PREFIX + hashtagPhrase + SUFFIX;
     }
 }

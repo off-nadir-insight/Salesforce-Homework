@@ -105,7 +105,12 @@ public class VariablesDatatypesOperatorsTest {
     static void generatesHashtag_test() {
         String result;
         result = VariablesDatatypesOperators.generatesHashtag(new List<String>{'Salesforce', 'Developer', 'Life'});
-        Assert.isNotNull(result, 'Null return unexpected.');
-        // Assert.areEqual('#SalesforceDeveloperLife', actual, msg)
+        Assert.isNotNull(result, 'Null return unexpected');
+        result = VariablesDatatypesOperators.generatesHashtag(new List<String>{'Salesforce', 'Developer', 'Life'});
+        Assert.areEqual('#SalesforceDeveloperLife!', result, 'Unexpected output string');
+        result = VariablesDatatypesOperators.generatesHashtag(new List<String>{'dev', 'stuff'});
+        Assert.areEqual('#DevStuff!', result, 'Unexpected output string');
+        result = VariablesDatatypesOperators.generatesHashtag(new List<String>{'dev ', '  ', '  stuff'});
+        Assert.areEqual('#DevStuff!', result, 'Unexpected handling of blank inputs');
     }
 }

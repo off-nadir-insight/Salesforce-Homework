@@ -12,20 +12,11 @@
 
 public with sharing class VariablesDatatypesOperators {
 
-    /**
-     * Perform addition of two integer values
-     * Should either value be null, return null
-     * Ex. addition(1, 2) should return 3
-     * Ex. addition(1, null) should return null
-     * @param a first integer
-     * @param b second integer
-     * @return sum of the two integers
-     */
-    public static Integer addsTwoIntegers(Integer a, Integer b) {
-        if (a == null || b == null) {
+    public static Integer addsTwoIntegers(Integer addend1, Integer addend2) {
+        if (addend1 == null || addend2 == null) {
             return null;
         } else {
-            return a + b;
+            return addend1 + addend2;
         }
     }
 

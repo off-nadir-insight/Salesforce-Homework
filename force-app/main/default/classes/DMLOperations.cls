@@ -19,21 +19,30 @@ public with sharing class DMLOperations {
     }
 
     public static List<Account> upsertsAccountDescriptionsFromListOfAccountNames(List<String> accountNames, String updatedDescriptionString) {
-        List<Account> accountsToInsert = new List<Account>();
-        List<Account> accountsToUpdate = new List<Account>();
-        // check if account name exists
-            // create a list of accounts that do exist
-                // query for accounts in list of names -> list of accounts
-                // create map<String accountName, Account account> existingAccounts
-                // for each name in the list of account names
-                    // if the name is in the .keyset
-                        // .get(accountName) to assign the account
-                        // update the description
-                        // add to list of accounts to upsert
-                    // if the name isn't in the .keyset
-                        // create new account from name
-                        // assign description
-                        // add to list to upsert
-                // upsert accounts
+        List<Account> accountsToUpsert = new List<Account>();
+        List<Account> existingAccounts = [SELECT Id, Name, Description FROM Account WHERE Name IN :accountNames];
+        Map<String, Account> mapAccountNamesToAccounts = new Map<String, Account>();
+        if (!existingAccounts.isEmpty()) {
+            for (Account acc : existingAccounts) {
+                mapAccountNamesToAccounts.put(acc.Name, acc);
+            }
+        } else {
+            System.debug('No existing accounts found for upsert');
+        }
+        for (String accountName : AccountNames) {
+            if (mapAccountNamesToAccounts.containsKey(accountName)) {
+                Account existingAccount = mapAccountNamesToAccounts.get(accountName);
+                existingAccount.Description = updatedDescriptionString;
+                accountsToUpsert.add(existingAccount);
+            } else {
+                Account newAccount = new Account(
+                    Name = accountName, 
+                    Description = updatedDescriptionString
+                );
+                accountsToUpsert.add(newAccount);
+            }
+        }
+        Database.upsert(accountsToUpsert);
+        return accountsToUpsert;
     }
 }

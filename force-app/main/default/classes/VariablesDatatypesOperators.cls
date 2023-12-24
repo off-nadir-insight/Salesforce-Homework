@@ -20,48 +20,25 @@ public with sharing class VariablesDatatypesOperators {
         }
     }
 
-    /**
-     * Performs subtraction of two integer values
-     * Should either value be null, return null
-     * Ex. subtraction(5, 2) should return 3
-     * @param a minuend integer
-     * @param b subtrahend integer
-     * @return difference of two integers
-     */
-    public static Integer subtractsTwoIntegers(Integer a, Integer b) {
-        if (a == null || b == null) {
+    public static Integer subtractsTwoIntegers(Integer minuend, Integer subtrahend) {
+        if (minuend == null || subtrahend == null) {
             return null;
         } else {
-            return a - b;
+            return minuend - subtrahend;
         }
     }
 
-    /**
-     * Performs multiplication of two Integer values
-     * Ex. multiplication(4, 5) should return 20
-     * @param a Integer multiplicand 
-     * @param b Integer multiplier
-     * @return Integer product of two values
-     */
-    public static Integer multiplysTwoIntegers(Integer a, Integer b) {
-        return a * b;
+    public static Integer multipliesTwoIntegers(Integer multiplicand, Integer multiplier) {
+        return multiplicand * multiplier;
     }
 
-    /**
-     * Performs division of two Integer values, acknowleging the Apex handling of 
-     * Integer division
-     * Ex. division(10, 2) should return 5
-     * @param a Decimal dividend
-     * @param b Decimal divisor
-     * @return Integer quotient of two input integers
-     */
-    public static Integer dividesTwoIntegers(Integer a, integer b) {
-        if (a == null || b == null) {
+    public static Integer dividesTwoIntegers(Integer dividend, integer divisor) {
+        if (dividend == null || divisor == null) {
             return null;
-        } else if (b == 0) {
+        } else if (divisor == 0) {
             return null;
         } else {
-            return a / b;
+            return dividend / divisor;
         }
     }
 

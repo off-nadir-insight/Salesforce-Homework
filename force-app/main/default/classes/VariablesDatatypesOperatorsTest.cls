@@ -37,15 +37,15 @@ public class VariablesDatatypesOperatorsTest {
     }
 
     @IsTest
-    static void multiplysTwoIntegers_test() {
+    static void multipliesTwoIntegers_test() {
         Integer result;
-        result = VariablesDatatypesOperators.multiplysTwoIntegers(10, 0);
+        result = VariablesDatatypesOperators.multipliesTwoIntegers(10, 0);
         Assert.areEqual(0, result, 'Incorrect zero multiplication result');
-        result = VariablesDatatypesOperators.multiplysTwoIntegers(2, 3);
+        result = VariablesDatatypesOperators.multipliesTwoIntegers(2, 3);
         Assert.areEqual(6, result, 'Incorrect multiplication result');
-        result = VariablesDatatypesOperators.multiplysTwoIntegers(2, -4);
+        result = VariablesDatatypesOperators.multipliesTwoIntegers(2, -4);
         Assert.areEqual(-8, result, 'Incorrect negative multiplication result');
-        result = VariablesDatatypesOperators.multiplysTwoIntegers(-7, -4);
+        result = VariablesDatatypesOperators.multipliesTwoIntegers(-7, -4);
         Assert.areEqual(28, result, 'Incorrect negative multiplication result');
     }
 

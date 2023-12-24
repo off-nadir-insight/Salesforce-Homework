@@ -20,11 +20,14 @@ public with sharing class DMLOperationsTest {
 
         Integer countOfAccountsBeforeTest = [SELECT COUNT() FROM Account];
         Test.startTest();
-        DMLOperations.insertsAccountsFromListOfNames(accountNames);
+        List<Account> accountsToVerify = DMLOperations.insertsAccountsFromListOfNames(accountNames);
         Test.stopTest();
 
         Integer countOfAccountsAfterTest = [SELECT COUNT() FROM Account];
         Assert.areEqual(accountNames.size(), countOfAccountsAfterTest - countOfAccountsBeforeTest, 'Count of created accounts not matching');
+        for (Account acc : accountsToVerify) {
+            Assert.isNotNull(acc.Id, 'Id not generated from list of names');
+        }
     }
 
     @IsTest 
@@ -32,7 +35,8 @@ public with sharing class DMLOperationsTest {
         List<String> accountNamesToUpdate = new List<String>{
             'TestAccount0', 
             'TestAccount1', 
-            'TestAccount1'
+            'TestAccount2',
+            'TestAccount10'
         };
         String updatedDescriptionString = 'This is an updated description';
 
@@ -44,8 +48,12 @@ public with sharing class DMLOperationsTest {
             Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
             Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
         }
+        Assert.areEqual(0, [SELECT Id, Name FROM Account WHERE Name = 'TestAccount10' LIMIT 1].size(), 'Non-existant account shouldn\'t be inserted');
+    }
 
-
+    @IsTest 
+    public static void upsertsAccountDescriptionsFromListOfAccountNames_test() {
+        
     }
     // @IsTest 
     // public static void upsertAccountsWithContacts_test() {

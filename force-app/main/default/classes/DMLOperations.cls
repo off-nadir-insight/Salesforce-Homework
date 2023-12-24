@@ -1,11 +1,12 @@
 public with sharing class DMLOperations {
-    public static void insertsAccountsFromListOfNames(List<String> accountNames) {
+    public static List<Account> insertsAccountsFromListOfNames(List<String> accountNames) {
         List<Account> accountsToInsert = new List<Account>();
         for (String accountName : accountNames) {
             Account newAccount = new Account(Name=accountName);
             accountsToInsert.add(newAccount);
         }
         insert accountsToInsert;
+        return accountsToInsert;
     }
 
     public static List<Account> updatesAccountsFromListOfNames(List<String> accountNames, String updatedDescriptionString) {
@@ -15,5 +16,9 @@ public with sharing class DMLOperations {
         }
         update accountsToUpdate;
         return accountsToUpdate;
+    }
+
+    public static List<Account> upsertsAccountDescriptionsFromListOfAccountNames(List<String> accountNames, String updatedDescriptionString) {
+        return null;
     }
 }

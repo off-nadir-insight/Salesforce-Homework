@@ -19,6 +19,21 @@ public with sharing class DMLOperations {
     }
 
     public static List<Account> upsertsAccountDescriptionsFromListOfAccountNames(List<String> accountNames, String updatedDescriptionString) {
-        return null;
+        List<Account> accountsToInsert = new List<Account>();
+        List<Account> accountsToUpdate = new List<Account>();
+        // check if account name exists
+            // create a list of accounts that do exist
+                // query for accounts in list of names -> list of accounts
+                // create map<String accountName, Account account> existingAccounts
+                // for each name in the list of account names
+                    // if the name is in the .keyset
+                        // .get(accountName) to assign the account
+                        // update the description
+                        // add to list of accounts to upsert
+                    // if the name isn't in the .keyset
+                        // create new account from name
+                        // assign description
+                        // add to list to upsert
+                // upsert accounts
     }
 }

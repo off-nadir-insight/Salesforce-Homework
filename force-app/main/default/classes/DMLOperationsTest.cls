@@ -53,7 +53,24 @@ public with sharing class DMLOperationsTest {
 
     @IsTest 
     public static void upsertsAccountDescriptionsFromListOfAccountNames_test() {
+        List<String> accountNamesToUpsert = new List<String>{
+            'TestAccount0', 
+            'TestAccount1', 
+            'TestAccount2',
+            'TestAccount10'
+        };
+        String updatedDescriptionString = 'This description is updated';
+
+        Test.startTest();
+        List<Account> accountsToVerify = DMLOperations.upsertsAccountDescriptionsFromListOfAccountNames(accountNamesToUpsert, updatedDescriptionString);
+        Test.stopTest();
+
+        for (Account accountToVerify : accountsToVerify) {
+            Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
+            Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
+        }
         
+
     }
     // @IsTest 
     // public static void upsertAccountsWithContacts_test() {

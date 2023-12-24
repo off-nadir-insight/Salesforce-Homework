@@ -11,9 +11,10 @@ public with sharing class DMLOperationsTest {
         DMLOperations.insertsAccountsFromListOfNames(accountNames);
         Test.stopTest();
 
-        List<Account> accountsCreatedFromTest = [SELECT Id FROM Account];
-        Assert.isNotNull(accountsCreatedFromTest);
-        Assert.areEqual(accountNames.size(), accountsCreatedFromTest.size(), 'Count of created accounts not matching');
+        Integer countOfAccountsCreated = [SELECT COUNT() FROM Account];
+        Assert.isNotNull(countOfAccountsCreated);
+        Assert.areEqual(accountNames.size(), countOfAccountsCreated, 'Count of created accounts not matching');
+
     }
     // @IsTest 
     // public static void upsertAccountsWithContacts_test() {

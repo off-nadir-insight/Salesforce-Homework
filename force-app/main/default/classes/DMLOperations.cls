@@ -7,4 +7,13 @@ public with sharing class DMLOperations {
         }
         insert accountsToInsert;
     }
+
+    public static List<Account> updatesAccountsFromListOfNames(List<String> accountNames, String updatedDescriptionString) {
+        List<Account> accountsToUpdate = [SELECT Id, Name FROM Account WHERE Name IN :accountNames];
+        for (Account acct : accountsToUpdate) {
+            acct.Description = updatedDescriptionString;
+        }
+        update accountsToUpdate;
+        return accountsToUpdate;
+    }
 }

@@ -1,5 +1,15 @@
 @IsTest 
 public with sharing class DMLOperationsTest {
+    @TestSetup
+    static void setup(){
+        List<Account> testAccountsToInsert = new List<Account>();
+        for (Integer i = 0; i < 5; i++) {
+            Account newAccount = new Account(Name = 'TestAccount' + i); 
+            testAccountsToInsert.add(newAccount);
+        }
+        insert testAccountsToInsert;
+    }
+
     @IsTest 
     public static void insertsAccountsFromListOfNames_test() {
         List<String> accountNames = new List<String> {
@@ -7,13 +17,34 @@ public with sharing class DMLOperationsTest {
             'AccountName2',
             'AccountName3'
         };
+
+        Integer countOfAccountsBeforeTest = [SELECT COUNT() FROM Account];
         Test.startTest();
         DMLOperations.insertsAccountsFromListOfNames(accountNames);
         Test.stopTest();
 
-        Integer countOfAccountsCreated = [SELECT COUNT() FROM Account];
-        Assert.isNotNull(countOfAccountsCreated);
-        Assert.areEqual(accountNames.size(), countOfAccountsCreated, 'Count of created accounts not matching');
+        Integer countOfAccountsAfterTest = [SELECT COUNT() FROM Account];
+        Assert.areEqual(accountNames.size(), countOfAccountsAfterTest - countOfAccountsBeforeTest, 'Count of created accounts not matching');
+    }
+
+    @IsTest 
+    public static void updatesAccountsFromListOfNames_test() {
+        List<String> accountNamesToUpdate = new List<String>{
+            'TestAccount0', 
+            'TestAccount1', 
+            'TestAccount1'
+        };
+        String updatedDescriptionString = 'This is an updated description';
+
+        Test.startTest();
+        List<Account> accountsToVerify = DMLOperations.updatesAccountsFromListOfNames(accountNamesToUpdate, updatedDescriptionString);
+        Test.stopTest();
+
+        for (Account accountToVerify : accountsToVerify) {
+            Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
+            Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
+        }
+
 
     }
     // @IsTest 

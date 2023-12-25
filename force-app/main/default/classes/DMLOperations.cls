@@ -21,17 +21,14 @@ public with sharing class DMLOperations {
     public static List<Account> upsertsAccountDescriptionsFromListOfAccountNames(List<String> accountNames, String updatedDescriptionString) {
         List<Account> accountsToUpsert = new List<Account>();
         List<Account> existingAccounts = [SELECT Id, Name, Description FROM Account WHERE Name IN :accountNames];
-        Map<String, Account> mapAccountNamesToAccounts = new Map<String, Account>();
-        if (!existingAccounts.isEmpty()) {
-            for (Account acc : existingAccounts) {
-                mapAccountNamesToAccounts.put(acc.Name, acc);
-            }
-        } else {
-            System.debug('No existing accounts found for upsert');
+        Map<String, Account> existingAccountNamesToAccounts = returnsMapOfAccountNamesToAccounts(existingAccounts);
+        if (existingAccountNamesToAccounts == null ){
+            return insertsAccountsFromListOfNames(accountNames);
         }
+
         for (String accountName : AccountNames) {
-            if (mapAccountNamesToAccounts.containsKey(accountName)) {
-                Account existingAccount = mapAccountNamesToAccounts.get(accountName);
+            if (existingAccountNamesToAccounts.containsKey(accountName)) {
+                Account existingAccount = existingAccountNamesToAccounts.get(accountName);
                 existingAccount.Description = updatedDescriptionString;
                 accountsToUpsert.add(existingAccount);
             } else {
@@ -44,5 +41,18 @@ public with sharing class DMLOperations {
         }
         Database.upsert(accountsToUpsert);
         return accountsToUpsert;
+    }
+
+    private static Map<String, Account> returnsMapOfAccountNamesToAccounts(List<Account> existingAccounts) {
+        Map<String, Account> existingAccountNamesToAccounts = new Map<String, Account>();
+        if (existingAccounts != null) {
+            for (Account acc : existingAccounts) {
+                existingAccountNamesToAccounts.put(acc.Name, acc);
+            }
+        } else {
+            System.debug('No existing accounts found for upsert');
+            return null;
+        }
+        return existingAccountNamesToAccounts;
     }
 }

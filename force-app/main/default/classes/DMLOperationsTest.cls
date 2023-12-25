@@ -52,7 +52,7 @@ public with sharing class DMLOperationsTest {
     }
 
     @IsTest 
-    public static void upsertsAccountDescriptionsFromListOfAccountNames_test() {
+    public static void upsertsAccountDescriptionsFromListOfAccountNames_test_mixedPreExisting() {
         List<String> accountNamesToUpsert = new List<String>{
             'TestAccount0', 
             'TestAccount1', 
@@ -69,8 +69,44 @@ public with sharing class DMLOperationsTest {
             Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
             Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
         }
-        
+    }
 
+    @IsTest
+    public static void upsertsAccountDescriptionsFromListOfAccountNames_test_allNewAccounts() {
+        List<String> accountNamesToUpsert = new List<String>{
+            'TestAccount20', 
+            'TestAccount21', 
+            'TestAccount22'
+        };
+        String updatedDescriptionString = 'This description is updated';
+
+        Test.startTest();
+        List<Account> accountsToVerify = DMLOperations.upsertsAccountDescriptionsFromListOfAccountNames(accountNamesToUpsert, updatedDescriptionString);
+        Test.stopTest();
+
+        for (Account accountToVerify : accountsToVerify) {
+            Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
+            Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
+        }
+    }
+
+    @IsTest
+    public static void upsertsAccountDescriptionsFromListOfAccountNames_test_allExistingAccounts() {
+        List<String> accountNamesToUpsert = new List<String>{
+            'TestAccount0', 
+            'TestAccount1', 
+            'TestAccount2'
+        };
+        String updatedDescriptionString = 'This description is updated';
+
+        Test.startTest();
+        List<Account> accountsToVerify = DMLOperations.upsertsAccountDescriptionsFromListOfAccountNames(accountNamesToUpsert, updatedDescriptionString);
+        Test.stopTest();
+
+        for (Account accountToVerify : accountsToVerify) {
+            Assert.isNotNull(accountToVerify.Description, 'Expected a description to be not-null');
+            Assert.areEqual(updatedDescriptionString, accountToVerify.Description, 'Description doesn\'t match expected message');
+        }
     }
     // @IsTest 
     // public static void upsertAccountsWithContacts_test() {

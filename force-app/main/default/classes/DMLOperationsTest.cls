@@ -156,4 +156,45 @@ public with sharing class DMLOperationsTest {
     //         Assert.areEqual(cont.Account.Name, contact.LastName.replace('Test Contact ', 'Test Account '), 'Contact should be linked to its Account');
     //     }
     // }
+    @IsTest 
+    private static void returnsContactsMissingInfo_test_positiveOutcome() {
+        List<Contact> contactsToInsertForTesting = new List<Contact>();
+        List<Contact> testContactsWithInfo = new List<Contact>{
+            new Contact(LastName = 'CodeyHasInfo',Phone = '(123) 456-7890',Email = 'hasinfo1@email.com'),
+            new Contact(LastName = 'AstroHasInfo',Phone = '(123) 456-7891',Email = 'hasinfo2@email.com'),
+            new Contact(LastName = 'FoxeyHasInfo',Phone = '(123) 456-7892',Email = 'hasinfo3@email.com')
+        };
+        contactsToInsertForTesting.addAll(testContactsWithInfo);
+        List<Contact> testContactsWithSomeInfo = new List<Contact>{
+            new Contact(LastName = 'hasSomeInfo1',Phone = '(123) 456-7890'),
+            new Contact(LastName = 'hasSomeInfo2',Email = 'hasinfo2@email.com')
+        };
+        contactsToInsertForTesting.addAll(testContactsWithSomeInfo);
+        List<Contact> testContactsWithNoInfo = new List<Contact>{
+            new Contact(LastName = 'hasNoInfo1'),
+            new Contact(LastName = 'hasNoInfo2')
+        };
+        contactsToInsertForTesting.addAll(testContactsWithNoInfo);
+        insert contactsToInsertForTesting;
+        Integer numberOfContactsWithMissingInfo = testContactsWithSomeInfo.size() + testContactsWithNoInfo.size();
+
+        Test.startTest();
+        List<Contact> assertionList = DMLOperations.returnsContactsMissingInfo();
+        Test.stopTest();
+
+        Assert.isNotNull(assertionList, 'Unexpected null contact list returned');
+        // Assert.areEqual(0, assertionList.size(), 'Contacts list size does not match expected');
+        Assert.areEqual(numberOfContactsWithMissingInfo, assertionList.size(), 'length of list of contacts with missing info does not match expected');
+    }
+
+    @IsTest 
+    private static void returnsContactsMissingInfo_test_zeroOutcome() {
+
+        Test.startTest();
+        List<Contact> assertionList = DMLOperations.returnsContactsMissingInfo();
+        Test.stopTest();
+
+        Assert.areEqual(0, assertionList.size(), 'Expected empty list');
+
+    }
 }

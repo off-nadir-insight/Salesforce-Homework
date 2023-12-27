@@ -55,4 +55,14 @@ public with sharing class DMLOperations {
         }
         return existingAccountNamesToAccounts;
     }
+
+    public static List<Contact> returnsContactsMissingInfo() {
+        List<Contact> contactsMissingInfo = [
+            SELECT Id, Name, Phone, Email 
+            FROM Contact 
+            WHERE Phone = NULL OR Email = NULL
+        ];
+
+        return contactsMissingInfo;
+    }
 }
